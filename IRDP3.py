@@ -12,5 +12,5 @@ import matplotlib.pyplot as plt
 
 
 
-img1_dir = './data/motherboard_image.JPEG'
+img1 = cv.imread('./data/motherboard_image.JPEG', cv.IMREAD_GRAYSCALE)
 
