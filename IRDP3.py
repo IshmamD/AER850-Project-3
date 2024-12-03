@@ -11,3 +11,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+
+img1_dir = './data/motherboard_image.JPEG'
+
