@@ -27,5 +27,25 @@ contours, hierarchy = cv.findContours(th_img1, cv.RETR_TREE, cv.CHAIN_APPROX_SIM
 filtered_contours = []
 
 for cnt in contours:
-    if cv.contourArea(cnt) > 5000:  # Check if the contour's area is greater than 5000
+    if cv.contourArea(cnt) > 2000:  # Check if the contour's area is greater than 5000
         filtered_contours.append(cnt)
+
+mask = np.zeros_like(img1)
+cv.drawContours(mask, filtered_contours, -1, (255), thickness=cv.FILLED)
+
+plt.figure(figsize=(5, 5))
+plt.imshow(mask, cmap='gray')
+plt.title('Filtered Contours Mask')
+plt.xticks([]), plt.yticks([])
+plt.show()
+
+cv.imwrite('./data/pcb_mask.png', mask)
+
+newimg1 = cv.bitwise_and(img1, img1, mask=mask)
+
+plt.figure(figsize=(5, 5))
+plt.imshow(newimg1)
+plt.title('Extracted Motherboard Image')
+plt.xticks([]), plt.yticks([])
+plt.show()
+
