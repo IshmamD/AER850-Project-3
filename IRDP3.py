@@ -4,7 +4,7 @@ Created on Sat Nov 30 21:39:04 2024
 
 @author: ishma
 """
-#STEP 1
+#STEP 1 - Object Masking
 
 import cv2 as cv
 import numpy as np
@@ -51,4 +51,6 @@ plt.imshow(newimg1)
 plt.title('Extracted Motherboard Image')
 plt.xticks([]), plt.yticks([])
 plt.show()
+
+#STEP 2 - YoloV8 Training
 
