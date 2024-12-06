@@ -55,3 +55,8 @@ plt.show()
 
 #STEP 2 - YoloV8 Training
 
+path = './data/train'
+model = YOLO('yolov8n.pt')
+
+result = model.train(data=path,epochs=50,batch=32,imgsz=900,name='detector')
+model.save('detector.pt')
