@@ -9,6 +9,7 @@ Created on Sat Nov 30 21:39:04 2024
 import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
+from ultralytics import YOLO
 
 og_img1 = cv.imread('./data/motherboard_image.JPEG')
 img1 = cv.imread('./data/motherboard_image.JPEG', cv.IMREAD_GRAYSCALE)
