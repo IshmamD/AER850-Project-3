@@ -11,6 +11,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from ultralytics import YOLO
 
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
 og_img1 = cv.imread('./data/motherboard_image.JPEG')
 img1 = cv.imread('./data/motherboard_image.JPEG', cv.IMREAD_GRAYSCALE)
 _, th_img1 = cv.threshold(img1, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)
@@ -58,5 +61,5 @@ plt.show()
 path = './data/data.yaml'
 model = YOLO('yolov8n.pt')
 
-result = model.train(data=path,epochs=50,batch=32,imgsz=900,name='detector')
+result = model.train(data=path,epochs=10,batch=4,imgsz=900,name='detector')
 model.save('detector.pt')
