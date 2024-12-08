@@ -28,7 +28,6 @@ plt.show()
 
 contours, hierarchy = cv.findContours(th_img1, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
 
-#largest_contour = max(contours, key=cv.contourArea)
 
 filtered_contours = []
 
@@ -56,10 +55,53 @@ plt.title('Extracted Motherboard Image')
 plt.xticks([]), plt.yticks([])
 plt.show()
 
-#STEP 2 - YoloV8 Training
-
+#STEP 2 - YoloV8 Training - THIS PART WAS DONE IN GOOGLE COLLAB
+'''
 path = './data/data.yaml'
 model = YOLO('yolov8n.pt')
 
-result = model.train(data=path,epochs=10,batch=4,imgsz=900,name='detector')
+result = model.train(data=path,epochs=60,batch=4,imgsz=900,name='detector')
 model.save('detector.pt')
+'''
+
+model = YOLO('detector.pt')
+
+ardmega = './data/evaluation/ardmega.jpg'
+arduno = './data/evaluation/arduno.jpg'
+rasppi = './data/evaluation/rasppi.jpg'
+
+results1 = model.predict(source=ardmega, save=True)
+
+for result in results1:
+    im_bgr = result.plot(font_size = 90,pil=True)
+    im_rgb = cv.cvtColor(im_bgr, cv.COLOR_BGR2RGB)
+    
+    plt.figure(figsize=(20, 20))
+    plt.imshow(im_rgb)
+    plt.title('Predictions for Image 1')
+    plt.axis('off')
+    plt.show()
+    
+results2 = model.predict(source=arduno, save=True)
+
+for result in results2:
+    im_bgr = result.plot(font_size = 25,pil=True)
+    im_rgb = cv.cvtColor(im_bgr, cv.COLOR_BGR2RGB)
+    
+    plt.figure(figsize=(15, 15))
+    plt.imshow(im_rgb)
+    plt.title('Predictions for Image 2')
+    plt.axis('off')
+    plt.show()
+    
+results3 = model.predict(source=rasppi, save=True)
+
+for result in results3:
+    im_bgr = result.plot(font_size = 50,pil=True)
+    im_rgb = cv.cvtColor(im_bgr, cv.COLOR_BGR2RGB)
+    
+    plt.figure(figsize=(15, 15))
+    plt.imshow(im_rgb)
+    plt.title('Predictions for Image 3')
+    plt.axis('off')
+    plt.show()
